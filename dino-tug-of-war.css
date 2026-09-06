@@ -1,0 +1,293 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: #f0fdf4;
+    overflow: hidden;
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.game-screen {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Colors from App.css */
+:root {
+    --green-button: #22c55e;
+    --green-button-hover: #16a34a;
+    --green-primary: #10b981;
+    --red-button: #ef4444;
+    --red-button-hover: #dc2626;
+    --text-dark: #1f2937;
+}
+
+/* Top - Questions */
+.game-top {
+    display: flex;
+    min-height: 25vh;
+    padding: 15px;
+    gap: 15px;
+    background: white;
+}
+
+.team-panel {
+    flex: 1;
+    border-radius: 15px;
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 4px solid;
+    position: relative;
+    overflow-y: auto;
+}
+
+.team-panel.team-a {
+    border-color: var(--green-button);
+    background-color: #f0fdf4;
+}
+
+.team-panel.team-b {
+    border-color: var(--red-button);
+    background-color: #fef2f2;
+}
+
+.team-header {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.team-a .team-header { color: var(--green-button-hover); }
+.team-b .team-header { color: var(--red-button-hover); }
+
+.question-text {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #374151;
+}
+
+/* Middle - Tug of War */
+.game-middle {
+    flex: 1;
+    position: relative;
+    background: linear-gradient(to bottom, #dbeafe 0%, #bae6fd 60%, #86efac 60%, #4ade80 100%);
+    overflow: hidden;
+    min-height: 40vh;
+}
+
+.menu-btn {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    z-index: 10;
+    text-decoration: none;
+    color: #111;
+}
+
+.score-indicator {
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.2rem;
+    z-index: 10;
+}
+
+.score-a-text { color: var(--green-button); font-weight: bold; }
+.score-b-text { color: var(--red-button); font-weight: bold; }
+.score-center { font-size: 1.5rem; font-weight: 700; color: #333; }
+
+.clouds {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 40%;
+    background-image: radial-gradient(circle at 20% 30%, white 10%, transparent 11%),
+                      radial-gradient(circle at 80% 40%, white 8%, transparent 9%),
+                      radial-gradient(circle at 50% 20%, white 12%, transparent 13%);
+    opacity: 0.5;
+}
+
+.rope-container {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+}
+
+.rope {
+    width: 100%;
+    height: 8px;
+    background-color: #8B4513;
+    position: relative;
+}
+
+.rope-center-mark {
+    width: 20px;
+    height: 20px;
+    background-color: #dc2626;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%; /* Animated via JS */
+    transform: translate(-50%, -50%);
+    border: 3px solid #7f1d1d;
+    transition: left 0.5s ease-out;
+    z-index: 5;
+}
+
+.mark-a {
+    position: absolute;
+    left: 15%;
+    top: -20px;
+    width: 10px;
+    height: 48px;
+    background-color: rgba(34, 197, 94, 0.5);
+}
+
+.mark-b {
+    position: absolute;
+    right: 15%;
+    top: -20px;
+    width: 10px;
+    height: 48px;
+    background-color: rgba(239, 68, 68, 0.5);
+}
+
+.dino-character {
+    position: absolute;
+    top: 60%;
+    font-size: 5rem;
+    transform: translateY(-50%);
+    transition: left 0.5s ease-out;
+}
+
+.dino-a {
+    left: 20%; 
+    transform: translateY(-50%) scaleX(-1); /* Face right */
+}
+
+.dino-b {
+    left: 80%;
+}
+
+/* Bottom - Answers */
+.game-bottom {
+    display: flex;
+    min-height: 35vh;
+    background: white;
+}
+
+.answers-panel {
+    flex: 1;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
+}
+
+.answer-btn {
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.1s, opacity 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    text-align: center;
+}
+
+.answer-btn:active {
+    transform: scale(0.95);
+}
+
+.answer-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.team-a-answers .answer-btn { background-color: var(--green-button); }
+.team-a-answers .answer-btn:hover:not(:disabled) { background-color: var(--green-button-hover); }
+
+.team-b-answers .answer-btn { background-color: var(--red-button); }
+.team-b-answers .answer-btn:hover:not(:disabled) { background-color: var(--red-button-hover); }
+
+/* Winner Overlay */
+.winner-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    color: white;
+}
+
+.winner-overlay h2 {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    font-family: 'Fredoka', sans-serif;
+}
+
+.team-a-wins { color: var(--green-primary); }
+.team-b-wins { color: var(--red-button); }
+
+.play-again-btn {
+    background: white;
+    color: var(--text-dark);
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.5rem;
+    border-radius: 30px;
+    cursor: pointer;
+    font-family: 'Fredoka', sans-serif;
+    transition: transform 0.2s;
+}
+
+.play-again-btn:hover {
+    transform: scale(1.05);
+}

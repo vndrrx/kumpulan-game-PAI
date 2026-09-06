@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sambung Ayat (Juz Amma)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="sambung-ayat.css">
+</head>
+<body>
+    <button id="btn-fullscreen" title="Perbesar Layar" style="position: absolute; top: 20px; right: 20px; z-index: 1000; background: #fff; border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 1.5rem; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2);"><i class="fa-solid fa-expand"></i></button>
+    <div class="matchup-screen fade-in">
+        <div class="matchup-header">
+            <a href="index.html" class="menu-btn">⬅ Menu</a>
+            <h2>Sambung Ayat (Juz Amma)</h2>
+        </div>
+
+        <div class="matchup-layout">
+            <div 
+                class="matchup-pool" 
+                id="options-pool"
+                ondragover="handleDragOver(event)"
+                ondrop="handleDropOnPool(event)"
+            >
+                <!-- Pool items injected by JS -->
+            </div>
+
+            <div class="matchup-targets" id="targets-container">
+                <!-- Target rows injected by JS -->
+            </div>
+        </div>
+
+        <div class="matchup-footer" id="footer-actions">
+            <button class="submit-btn" id="submit-btn" disabled onclick="handleSubmit()">Kirim jawaban</button>
+        </div>
+
+        <!-- Score Popup -->
+        <div class="winner-overlay fade-in" id="score-popup" style="display: none;">
+            <h2>Luar Biasa!</h2>
+            <div class="score-display" id="final-score">Skor: 0 / 0</div>
+            <div class="finished-actions">
+                <button class="play-again-btn" onclick="document.getElementById('score-popup').style.display='none'">Lihat Jawaban</button>
+                <button class="play-again-btn primary-btn" onclick="initGame()">Main Lagi</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="sambung-ayat.js"></script>
+</body>
+</html>

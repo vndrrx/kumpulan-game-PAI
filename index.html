@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kumpulan Game Edukasi PAI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+        body {
+            background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            padding: 2rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Floating background shapes */
+        .bg-shape {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .shape-1 { width: 300px; height: 300px; top: -50px; left: -100px; }
+        .shape-2 { width: 500px; height: 500px; bottom: -200px; right: -150px; }
+
+        /* Intro Overlay */
+        #intro-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: white;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease;
+        }
+        
+        .splash-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeIn 1s;
+        }
+        .splash-screen h2 { color: #10b981; font-size: 3rem; margin-bottom: 10px; }
+        .splash-screen h3 { color: #374151; font-size: 1.8rem; font-weight: 700; margin-bottom: 5px; }
+        
+        .start-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeIn 1s;
+            background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+        }
+        .title-container { display: flex; align-items: center; gap: 15px; margin-bottom: 10px; }
+        .title-icon { font-size: 4rem; animation: bounce 2s infinite; }
+        .main-title { font-size: 4.5rem; text-shadow: 2px 4px 0 rgba(0,0,0,0.1); letter-spacing: 2px; text-align: center; color: white;}
+        .subtitle { font-size: 1.5rem; margin-bottom: 40px; opacity: 0.9; color: white;}
+        .start-btn {
+            background: transparent; color: white; border: 4px solid white;
+            padding: 15px 50px; font-size: 2rem; border-radius: 50px;
+            cursor: pointer; transition: all 0.3s; font-weight: bold;
+        }
+        .start-btn:hover { background: white; color: #10b981; transform: scale(1.05); }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Main Content */
+        #main-content {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            z-index: 1;
+        }
+        
+        .header { text-align: center; margin-bottom: 4rem; z-index: 1; position: relative; }
+        .header h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 0.5rem; text-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .header p { font-size: 1.3rem; opacity: 0.9; font-weight: 400; }
+        
+        .games-container {
+            display: flex;
+            gap: 2.5rem;
+            max-width: 1200px;
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+            z-index: 1;
+            position: relative;
+        }
+        
+        .game-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 24px;
+            padding: 3rem 2rem;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            width: calc(33.333% - 2.5rem);
+            min-width: 280px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+            border-color: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .game-card:hover::before { opacity: 1; }
+        
+        .game-icon {
+            font-size: 5rem;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 8px 12px rgba(0,0,0,0.2));
+            z-index: 1;
+            transition: transform 0.4s ease;
+        }
+        
+        .game-card:hover .game-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .game-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            z-index: 1;
+        }
+        
+        .game-desc {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            z-index: 1;
+            line-height: 1.5;
+        }
+        
+        @media (max-width: 1024px) {
+            .game-card { width: calc(50% - 2.5rem); }
+        }
+        @media (max-width: 600px) {
+            .game-card { width: 100%; }
+            .header h1 { font-size: 2.5rem; }
+            .main-title { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Intro Overlay -->
+    <div id="intro-overlay">
+        <!-- Splash Screen -->
+        <div id="splash-screen" class="splash-screen">
+            <h2>Created by</h2>
+            <h3>Rena Anda Resta</h3>
+        </div>
+        <!-- Start Screen -->
+        <div id="start-screen" class="start-screen">
+            <div class="title-container">
+                <span class="title-icon">📚</span>
+                <h1 class="main-title">GAME EDUKASI PAI</h1>
+                <span class="title-icon" style="animation-delay: 1s">🎮</span>
+            </div>
+            <p class="subtitle">Platform Bermain Sambil Belajar</p>
+            <button class="start-btn" onclick="enterMain()">MASUK</button>
+        </div>
+    </div>
+
+    <!-- Main Background Shapes -->
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+
+    <!-- Main Content -->
+    <div id="main-content">
+        <div class="header">
+            <h1>Kumpulan Game PAI</h1>
+            <p>Pilih permainan interaktif untuk belajar Pendidikan Agama Islam</p>
+        </div>
+
+        <div class="games-container">
+            <!-- Game 1 -->
+            <a href="dino-tug-of-war.html" class="game-card">
+                <div class="game-icon">🦖</div>
+                <div class="game-title">Dino Tug of War</div>
+                <div class="game-desc">Tarik tambang dinosaurus sambil menjawab soal keagamaan.</div>
+            </a>
+
+            <!-- Game 2 -->
+            <a href="ular-tangga.html" class="game-card">
+                <div class="game-icon">🐍</div>
+                <div class="game-title">Game Tangga PAI</div>
+                <div class="game-desc">Mainkan papan interaktif dan panjat tangga pengetahuan.</div>
+            </a>
+
+            <!-- Game 3 -->
+            <a href="benar-salah.html" class="game-card">
+                <div class="game-icon">✔️❌</div>
+                <div class="game-title">Benar atau Salah</div>
+                <div class="game-desc">Kuis cepat ketangkasan untuk melatih pemahamanmu.</div>
+            </a>
+
+            <!-- Game 4 -->
+            <a href="sambung-ayat.html" class="game-card">
+                <div class="game-icon">🧩</div>
+                <div class="game-title">Sambung Ayat</div>
+                <div class="game-desc">Cocokkan potongan ayat Juz Amma dengan benar.</div>
+            </a>
+
+            <!-- Game 5 -->
+            <a href="buka-kotak.html" class="game-card">
+                <div class="game-icon">📦</div>
+                <div class="game-title">Buka Kotak Misteri</div>
+                <div class="game-desc">Pilih kotak dan jawab pertanyaan untuk menguji karaktermu.</div>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Check if intro has been shown in this session
+        if (!sessionStorage.getItem('introShown')) {
+            setTimeout(() => {
+                document.getElementById('splash-screen').style.display = 'none';
+                document.getElementById('start-screen').style.display = 'flex';
+                document.getElementById('intro-overlay').style.background = 'transparent';
+            }, 3000);
+        } else {
+            document.getElementById('intro-overlay').style.display = 'none';
+            document.getElementById('main-content').style.display = 'flex';
+        }
+
+        function enterMain() {
+            sessionStorage.setItem('introShown', 'true');
+            const overlay = document.getElementById('intro-overlay');
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                document.getElementById('main-content').style.display = 'flex';
+            }, 500);
+        }
+    </script>
+</body>
+</html>

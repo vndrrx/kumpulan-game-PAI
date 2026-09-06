@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buka Kotak Misteri</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="buka-kotak.css">
+</head>
+<body>
+    <div class="box-game-screen fade-in">
+        <div class="box-top-bar">
+            <a href="index.html" class="menu-btn" style="position:relative; top:0; left:0;">⬅ Menu</a>
+            <div class="box-timer">Waktu: <span id="timer-display">03:00</span></div>
+            <div class="box-title">Uji Karakter Religius</div>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div class="box-score">Skor: <span id="score-display">0</span></div>
+                <button id="btn-fullscreen" title="Perbesar Layar" style="background: #fff; border: 1px solid #e5e7eb; border-radius: 50%; width: 40px; height: 40px; font-size: 1.2rem; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; justify-content: center; align-items: center; color: #111;"><i class="fa-solid fa-expand"></i></button>
+            </div>
+        </div>
+
+        <div class="boxes-grid-container" id="grid-view">
+            <div class="boxes-grid" id="boxes-grid">
+                <!-- Boxes injected by JS -->
+            </div>
+        </div>
+
+        <div class="box-question-view fade-in" id="question-view" style="display: none;">
+            <div class="box-question-card" id="q-text">
+                <!-- Question Text -->
+            </div>
+            <div class="box-options-grid" id="q-options">
+                <!-- Options injected by JS -->
+            </div>
+        </div>
+        
+        <!-- Score Popup -->
+        <div class="winner-overlay fade-in" id="score-popup" style="display: none;">
+            <h2 id="final-message">Waktu Habis!</h2>
+            <div class="score-display" id="final-score">Skor Akhir: 0</div>
+            <div class="finished-actions">
+                <button class="play-again-btn primary-btn" onclick="initGame()">Main Lagi</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="buka-kotak.js"></script>
+</body>
+</html>

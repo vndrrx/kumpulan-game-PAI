@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benar atau Salah</title>
+    <link rel="stylesheet" href="benar-salah.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Background Pattern -->
+        <div class="bg-dots top-dots"></div>
+        <div class="bg-dots bottom-dots"></div>
+
+        <!-- Header: Timer & Score -->
+        <div class="header">
+            <div class="timer" id="timer">1:00</div>
+            <div class="score" id="score"><i class="fa-solid fa-check"></i> <span id="score-val">0</span></div>
+        </div>
+
+        <!-- Question Area -->
+        <div class="question-container" id="question-container">
+            <div class="question-text" id="question-text">
+                Bersiaplah...
+            </div>
+        </div>
+
+        <!-- Notification Overlay -->
+        <div id="notification" class="notification hidden">
+            <div id="notif-text">Benar!</div>
+        </div>
+
+        <!-- Controls (Buttons) -->
+        <div class="controls">
+            <button class="btn btn-benar" id="btn-benar">Benar</button>
+            <button class="btn btn-salah" id="btn-salah">Salah</button>
+        </div>
+
+        <!-- Footer Buttons -->
+        <div class="footer">
+            <a href="index.html" class="icon-btn" id="btn-menu" title="Kembali ke Menu"><i class="fa-solid fa-bars"></i></a>
+            <div class="right-footer">
+                <button class="icon-btn" id="btn-sound"><i class="fa-solid fa-volume-high"></i></button>
+                <button class="icon-btn" id="btn-fullscreen"><i class="fa-solid fa-expand"></i></button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="benar-salah.js"></script>
+</body>
+</html>
