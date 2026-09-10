@@ -291,3 +291,24 @@ body {
 .play-again-btn:hover {
     transform: scale(1.05);
 }
+
+@media (max-width: 900px) {
+    .dino-character { font-size: 3.5rem; }
+    .question-text { font-size: 1rem; }
+    .team-header { font-size: 1rem; }
+    .answer-btn { padding: 10px; font-size: 1rem; }
+}
+
+@media (max-width: 600px) {
+    .game-top { flex-direction: column; min-height: 40vh; }
+    .team-panel { border-width: 2px; padding: 10px; }
+    .score-indicator { padding: 5px 10px; font-size: 1rem; top: 10px; }
+    .score-center { font-size: 1.2rem; }
+    .dino-character { font-size: 2.5rem; }
+    .mark-a { left: 10%; }
+    .mark-b { right: 10%; }
+    .answers-panel { gap: 5px; }
+    .answer-btn { padding: 8px; font-size: 0.9rem; border-radius: 6px; }
+    .winner-overlay h2 { font-size: 2.5rem; }
+    .play-again-btn { font-size: 1.2rem; padding: 10px 20px; }
+}

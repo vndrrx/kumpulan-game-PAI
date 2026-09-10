@@ -32,6 +32,22 @@ let timeRemaining = 180; // 3 minutes
 let gameTimerInterval;
 let openedBoxes = [];
 let activeBoxIndex = null;
+let bgmStarted = false;
+
+const bgMusic = new Audio('bgm.mp3');
+bgMusic.loop = true;
+bgMusic.volume = 0.2;
+
+const correctSound = new Audio('correct.mp3');
+const wrongSound = new Audio('wrong.mp3');
+
+function checkBGM() {
+    if (!bgmStarted) {
+        bgMusic.play().catch(e => console.log("Audio play prevented: ", e));
+        bgmStarted = true;
+    }
+}
+document.addEventListener('click', checkBGM);
 
 const timerDisplay = document.getElementById('timer-display');
 const scoreDisplay = document.getElementById('score-display');
@@ -98,6 +114,8 @@ function renderGrid() {
 }
 
 function openBox(idx) {
+    checkBGM();
+    
     activeBoxIndex = idx;
     const q = questions[idx];
     
@@ -120,10 +138,14 @@ function openBox(idx) {
 
 function handleAnswer(selected, correct) {
     if (selected === correct) {
+        correctSound.currentTime = 0;
+        correctSound.play().catch(e => console.log(e));
         score += 20;
         scoreDisplay.innerText = score;
         openedBoxes.push({ index: activeBoxIndex, correct: true });
     } else {
+        wrongSound.currentTime = 0;
+        wrongSound.play().catch(e => console.log(e));
         openedBoxes.push({ index: activeBoxIndex, correct: false });
     }
     

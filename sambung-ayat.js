@@ -25,6 +25,22 @@ const questions = [
 let matchedBoxes = {}; // format: "qIndex-wordIndex": "word"
 let draggedOption = null;
 
+let bgmStarted = false;
+const bgMusic = new Audio('bgm.mp3');
+bgMusic.loop = true;
+bgMusic.volume = 0.2;
+
+const correctSound = new Audio('correct.mp3');
+const wrongSound = new Audio('wrong.mp3');
+
+function checkBGM() {
+    if (!bgmStarted) {
+        bgMusic.play().catch(e => console.log(e));
+        bgmStarted = true;
+    }
+}
+document.addEventListener('click', checkBGM);
+
 const colors = ['bg-red', 'bg-orange', 'bg-green', 'bg-pink', 'bg-blue', 'bg-teal', 'bg-purple', 'bg-yellow'];
 
 function initGame() {
@@ -99,6 +115,7 @@ function initGame() {
 }
 
 function handleDragStart(e, value) {
+    checkBGM();
     draggedOption = value;
     e.dataTransfer.setData('text/plain', value);
 }
@@ -209,6 +226,7 @@ function updateSubmitBtn() {
 }
 
 function handleSubmit() {
+    checkBGM();
     let score = 0;
     
     questions.forEach((q, qIdx) => {
@@ -235,6 +253,14 @@ function handleSubmit() {
             icon.innerText = '✗';
         }
     });
+
+    if (score === questions.length) {
+        correctSound.currentTime = 0;
+        correctSound.play().catch(e => console.log(e));
+    } else {
+        wrongSound.currentTime = 0;
+        wrongSound.play().catch(e => console.log(e));
+    }
 
     document.getElementById('final-score').innerText = `Skor: ${score} / ${questions.length}`;
     document.getElementById('score-popup').style.display = 'flex';

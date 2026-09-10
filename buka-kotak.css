@@ -179,3 +179,27 @@ body { font-family: 'Nunito', sans-serif; background-color: #f0f4f8; overflow: h
 .score-display { font-size: 3rem; font-weight: bold; color: #10b981; margin: 20px 0; background: white; padding: 20px 50px; border-radius: 20px;}
 .play-again-btn { background: white; color: #333; border: none; padding: 15px 40px; font-size: 1.5rem; border-radius: 30px; cursor: pointer; font-family: 'Fredoka', sans-serif; margin-top: 20px;}
 .play-again-btn.primary-btn { background: #10b981; color: white; }
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    .boxes-grid { grid-template-columns: repeat(4, 1fr); gap: 15px; }
+    .box-question-view { flex-direction: column; gap: 20px; padding: 20px; }
+    .box-question-card { width: 80%; min-height: 200px; padding: 20px; font-size: 1.5rem; }
+    .box-options-grid { width: 80%; }
+}
+
+@media (max-width: 600px) {
+    .boxes-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .box-top-bar { font-size: 1.2rem; padding: 10px 15px; flex-wrap: wrap; justify-content: center; gap: 10px; }
+    .box-title { width: 100%; text-align: center; margin-bottom: 5px; }
+    .box-number { font-size: 2.5rem; }
+    .correct-q-text { font-size: 0.75rem; -webkit-line-clamp: 3; }
+    .box-question-card { width: 100%; font-size: 1.3rem; padding: 15px; min-height: 150px; border-width: 4px; }
+    .box-options-grid { width: 100%; grid-template-columns: 1fr; gap: 10px; }
+    .box-option-card { min-height: 70px; padding: 10px; border-width: 4px; }
+    .opt-letter { font-size: 1.2rem; }
+    .opt-text { font-size: 1.1rem; }
+    .winner-overlay h2 { font-size: 2.5rem; text-align: center; }
+    .score-display { font-size: 2rem; padding: 15px 30px; }
+    .play-again-btn { font-size: 1.2rem; padding: 10px 30px; }
+}

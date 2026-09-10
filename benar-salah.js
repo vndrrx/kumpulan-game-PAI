@@ -38,6 +38,22 @@ let speed = 0;
 let lastTimestamp = 0;
 let isFullscreen = false;
 
+let bgmStarted = false;
+const bgMusic = new Audio('bgm.mp3');
+bgMusic.loop = true;
+bgMusic.volume = 0.2;
+
+const correctSound = new Audio('correct.mp3');
+const wrongSound = new Audio('wrong.mp3');
+
+function checkBGM() {
+    if (!bgmStarted) {
+        bgMusic.play().catch(e => console.log(e));
+        bgmStarted = true;
+    }
+}
+document.addEventListener('click', checkBGM);
+
 const questionEl = document.getElementById('question-text');
 const scoreEl = document.getElementById('score-val');
 const timerEl = document.getElementById('timer');
@@ -141,19 +157,27 @@ function handleAnswer(userAnswer) {
     questionActive = false;
     cancelAnimationFrame(animationFrameId);
     
+    checkBGM();
+    
     const q = questions[currentQuestionIndex];
     let explanationHTML = `<div class="explanation">${q.explanation}</div>`;
     
     if (userAnswer === null) {
         // Missed (telat) -> "Salah" notification but game continues
+        wrongSound.currentTime = 0;
+        wrongSound.play().catch(e => console.log(e));
         showNotification(`Telat!<br>Salah${explanationHTML}`, "notif-salah", 4000);
     } else if (userAnswer === q.answer) {
         // Correct
+        correctSound.currentTime = 0;
+        correctSound.play().catch(e => console.log(e));
         score += 20;
         updateScoreDisplay();
         showNotification(`Benar!${explanationHTML}`, "notif-benar", 4000);
     } else {
         // Wrong
+        wrongSound.currentTime = 0;
+        wrongSound.play().catch(e => console.log(e));
         showNotification(`Salah!${explanationHTML}`, "notif-salah", 4000);
     }
     

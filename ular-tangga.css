@@ -378,3 +378,21 @@ body {
         font-size: 1.5rem;
     }
 }
+
+@media (max-width: 600px) {
+    .game-container { padding: 15px; gap: 15px; }
+    .board-area { height: calc(100vw - 30px); max-height: unset; }
+    .square { font-size: 1rem; padding: 2px; }
+    .token { font-size: 1.2rem; }
+    .logo h1 { font-size: 2rem; }
+    .avatar { font-size: 2rem; margin-bottom: 5px; }
+    .player-card { padding: 10px; }
+    .dice { font-size: 4rem; margin-bottom: 10px; }
+    .modal-content { padding: 20px; }
+    .modal-content h2 { font-size: 1.5rem; }
+    #question-text { font-size: 1.1rem; margin-bottom: 15px; }
+    .option-btn { padding: 10px; font-size: 0.95rem; }
+    .win-content h2 { font-size: 2rem; }
+    .winner-avatar { font-size: 4rem; margin: 10px 0; }
+    #game-messages { padding: 10px; font-size: 1rem; }
+}

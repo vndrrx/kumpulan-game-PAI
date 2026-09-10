@@ -204,6 +204,25 @@ body { font-family: 'Nunito', sans-serif; background-color: #fdfbf7; }
 .play-again-btn.primary-btn { background: #10b981; color: white; }
 
 @media (max-width: 768px) {
-    .matchup-layout { flex-direction: column-reverse; }
-    .matchup-pool { min-height: 200px; }
+    .matchup-layout { flex-direction: column-reverse; gap: 15px; }
+    .matchup-pool { min-height: 150px; max-height: 30vh; padding: 10px; }
+    .matchup-header h2 { font-size: 2rem; margin-top: 30px; }
+    .matchup-targets { gap: 15px; }
+    .matchup-row-multi { padding: 15px; gap: 10px; }
+    .matchup-question-text { font-size: 1rem; }
+    .matchup-box { min-width: 80px; height: 50px; }
+    .matchup-draggable { font-size: 1rem; padding: 10px; }
+    .matchup-draggable.inside-box { font-size: 1rem; }
+    .submit-btn { padding: 12px 30px; font-size: 1.1rem; }
+    .winner-overlay h2 { font-size: 2.5rem; text-align: center; }
+    .score-display { font-size: 2.5rem; padding: 15px 30px; }
+    .finished-actions { flex-direction: column; gap: 10px; }
+    .play-again-btn { font-size: 1rem; padding: 12px 30px; }
+}
+
+@media (max-width: 480px) {
+    .matchup-header h2 { font-size: 1.5rem; text-align: center; margin-top: 40px; }
+    .matchup-box { min-width: 60px; height: 40px; padding: 0 5px; }
+    .box-placeholder { font-size: 1rem; }
+    .row-icon { margin-right: 5px; font-size: 1.2rem; }
 }

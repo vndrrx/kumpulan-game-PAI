@@ -42,6 +42,22 @@ const players = [
 let turn = 0; // 0 for Player 1, 1 for Player 2
 let isAnimating = false;
 const cellPositions = {}; // Stores {x, y} for each cell 1-100
+let bgmStarted = false;
+
+const bgMusic = new Audio('bgm.mp3');
+bgMusic.loop = true;
+bgMusic.volume = 0.2;
+
+const correctSound = new Audio('correct.mp3');
+const wrongSound = new Audio('wrong.mp3');
+
+function checkBGM() {
+    if (!bgmStarted) {
+        bgMusic.play().catch(e => console.log("Audio play prevented: ", e));
+        bgmStarted = true;
+    }
+}
+document.addEventListener('click', checkBGM);
 
 const diceFaces = ['🎲', '⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
 
@@ -196,6 +212,9 @@ let diceRollCount = 0;
 
 async function rollDice() {
     if (isAnimating) return;
+    
+    checkBGM();
+    
     isAnimating = true;
     
     const player = players[turn];
@@ -327,6 +346,9 @@ async function handleAnswer(selected, correct, btn, player) {
     buttons.forEach(b => b.style.pointerEvents = 'none');
     
     if (selected === correct) {
+        correctSound.currentTime = 0;
+        correctSound.play().catch(e => console.log(e));
+        
         btn.classList.add('correct');
         modalFeedback.innerText = 'Benar! Kamu mendapat BONUS 6 langkah!';
         modalFeedback.className = 'feedback-text success';
@@ -337,6 +359,9 @@ async function handleAnswer(selected, correct, btn, player) {
         
         await executeMove(player, currentTargetPos);
     } else {
+        wrongSound.currentTime = 0;
+        wrongSound.play().catch(e => console.log(e));
+        
         btn.classList.add('wrong');
         // Highlight correct one
         buttons.forEach(b => {
