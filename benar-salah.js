@@ -41,7 +41,7 @@ let isFullscreen = false;
 let bgmStarted = false;
 const bgMusic = new Audio('bgm.mp3');
 bgMusic.loop = true;
-bgMusic.volume = 0.2;
+bgMusic.volume = 1.0;
 
 const correctSound = new Audio('correct.mp3');
 const wrongSound = new Audio('wrong.mp3');
