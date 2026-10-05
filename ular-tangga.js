@@ -261,7 +261,7 @@ async function executeMove(player, targetPos) {
 
 const paiQuestions = [
     {
-        question: "Ketika kamu tidak sengaja menjatuhkan sampah di halaman sekolah saat jam istirahat dan tidak ada orang yang melihatnya, sikap yang menunjukkan akhlak terpuji yaitu kejujuran dan tanggung jawab adalah ....",
+        question: "Ketika kamu tidak sengaja menjatuhkan sampah di halaman sekolah saat jam istirahat dan tidak ada orang yang melihatnya, sikap yang menunjukkan akhlak mulia yaitu kejujuran dan tanggung jawab adalah ....",
         options: [
             "Membiarkannya begitu saja",
             "Langsung memungut dan membuangnya ke tempat sampah",
